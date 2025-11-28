@@ -6,5 +6,10 @@ namespace PPT_Juego_Cliente
         {
             InitializeComponent();
         }
+
+        private void BtnIniciarSesion_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
