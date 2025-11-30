@@ -66,8 +66,8 @@ namespace PPT_Juego_Cliente.Panels
             // respuesta = "Javier|Password12" (por ejemplo)
             string[] datos = respuesta.Split('|');
 
-            string nombreJugador = datos[0];
-            string passJugador = datos[1];
+            string nombreJugador = datos[1];
+            string passJugador = datos[0];
 
             MessageBox.Show("Sesión iniciada correctamente: " + nombreJugador);
 
@@ -77,7 +77,7 @@ namespace PPT_Juego_Cliente.Panels
         private void BtnCrearCuenta_Click(object sender, EventArgs e)
         {
             // Abrir el formulario de creación de cuenta.
-            CrearCuenta CrearCuenta = new CrearCuenta();
+            CrearCuenta CrearCuenta = new CrearCuenta(stream);
             CrearCuenta.ShowDialog();
         }
     }
