@@ -1,3 +1,6 @@
+using PPT_Juego_Cliente.Panels;
+using System.Windows.Forms;
+
 namespace PPT_Juego_Cliente
 {
     public partial class Form1 : Form
@@ -5,30 +8,19 @@ namespace PPT_Juego_Cliente
         public Form1()
         {
             InitializeComponent();
-        }
 
-        private void BtnIniciarSesion_Click(object sender, EventArgs e)
-        {
-            // Verificar que no esté vacío el nombre de usuario y la contraseña.
-            if (TbNombreJugador.Text == "")
-            {
-                MessageBox.Show("Por favor, ingrese nombre de Jugador.");
-                return;
-            }
-            if (TbContraseñaJugador.Text == "")
-            {
-                MessageBox.Show("Por favor, ingrese contraseña.");
-                return;
-            }
+            // Limpiar el panel por si acaso
+            pDisplay.Controls.Clear();
 
-            // Verificar si el nombre de usuario y la contraseña están en nuestro servidor.
-        }
+            // Crear instancia del panel Login
+            IniciarSesion Login = new IniciarSesion();
 
-        private void BtnCrearCuenta_Click(object sender, EventArgs e)
-        {
-            // Abrir el formulario de creación de cuenta.
-            CrearCuenta CrearCuenta = new CrearCuenta();
-            CrearCuenta.Show();
+            // Para que ocupe todo el espacio
+            Login.Dock = DockStyle.Fill;
+
+            // Agregarlo al panel contenedor
+            pDisplay.Controls.Add(Login);
+            this.Text = "Iniciar sesion";
         }
     }
 }
