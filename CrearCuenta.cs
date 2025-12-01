@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,9 +13,12 @@ namespace PPT_Juego_Cliente
 {
     public partial class CrearCuenta : Form
     {
-        public CrearCuenta()
+        NetworkStream stream;
+        public CrearCuenta(NetworkStream stream)
         {
             InitializeComponent();
+
+            this.stream = stream;
 
             // Cambios de texto para actualizar el label.
             TbContraseñaJugador.TextChanged += PasswordFields_TextChanged;
@@ -66,6 +70,41 @@ namespace PPT_Juego_Cliente
             }
 
             // Aquí crear la cuenta en el servidor. :)
+            string usuario = TbNombreJugador.Text;
+            string contrasena = TbContraseñaJugador.Text;
+
+            // CREAR MENSAJE PARA EL SERVIDOR
+            string mensaje =
+                "CrearCuenta\n" +
+                $"{usuario}|{contrasena}\n";
+
+            // ENVIAR AL SERVIDOR
+            byte[] dataOut = Encoding.UTF8.GetBytes(mensaje);
+            stream.Write(dataOut, 0, dataOut.Length);
+
+            // ESPERAR RESPUESTA DEL SERVIDOR
+            byte[] buffer = new byte[1024];
+            int bytes = stream.Read(buffer, 0, buffer.Length);
+            string respuesta = Encoding.UTF8.GetString(buffer, 0, bytes).Trim();
+
+            // PROCESAR RESPUESTA
+            if (respuesta.StartsWith("Error"))
+            {
+                // EJEMPLO: "Error|Credenciales incorrectas"
+                string[] partes = respuesta.Split('|');
+                MessageBox.Show(partes.Length > 1 ? partes[1] : respuesta);
+                return;
+            }
+
+            // LOGIN CORRECTO
+            // respuesta = "Javier|Password12" (por ejemplo)
+            string[] datos = respuesta.Split('|');
+
+            string nombreJugador = datos[0];
+
+            MessageBox.Show("La cuenta se creo exitosamente: " + nombreJugador);
+
+            this.Close();
         }
 
         private void lbCoincidencias_Click(object sender, EventArgs e)
