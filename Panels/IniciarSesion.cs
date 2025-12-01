@@ -70,8 +70,51 @@ namespace PPT_Juego_Cliente.Panels
             string passJugador = datos[0];
 
             MessageBox.Show("Sesión iniciada correctamente: " + nombreJugador);
-
+            
             // Aquí ya puedes cambiar de ventana / cargar menú principal
+            Control container = this.Parent ?? this.FindForm();
+            var parentForm = this.FindForm();
+            if (container != null)
+            {
+                var menu = new MenuPrincipal();
+                menu.Dock = DockStyle.Fill;
+
+                container.SuspendLayout();
+
+                int index = container.Controls.IndexOf(this);
+                if (index >= 0)
+                {
+                    container.Controls.RemoveAt(index);
+                }
+                else
+                {
+                    // Si no se encuentra por índice, intentar remover por referencia
+                    if (container.Controls.Contains(this))
+                        container.Controls.Remove(this);
+                }
+
+                container.Controls.Add(menu);
+
+                if (index >= 0)
+                    container.Controls.SetChildIndex(menu, index);
+
+                container.ResumeLayout();
+
+                // Actualizar título del formulario principal
+                if (parentForm != null)
+                {
+                    parentForm.Text = "Menú Principal   |   Piedra Papel o Tijera";
+                }
+
+                // Liberar recursos del control de inicio de sesión
+                this.Dispose();
+            }
+            else
+            {
+                MessageBox.Show("No se pudo cargar el menú principal.");
+            }
+
+            
         }
 
         private void BtnCrearCuenta_Click(object sender, EventArgs e)

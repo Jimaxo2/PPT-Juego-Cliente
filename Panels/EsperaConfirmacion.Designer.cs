@@ -37,10 +37,9 @@
             // pbPiedra
             // 
             pbPiedra.Image = (Image)resources.GetObject("pbPiedra.Image");
-            pbPiedra.Location = new Point(116, 82);
-            pbPiedra.Margin = new Padding(3, 4, 3, 4);
+            pbPiedra.Location = new Point(96, 68);
             pbPiedra.Name = "pbPiedra";
-            pbPiedra.Size = new Size(225, 219);
+            pbPiedra.Size = new Size(197, 164);
             pbPiedra.SizeMode = PictureBoxSizeMode.Zoom;
             pbPiedra.TabIndex = 19;
             pbPiedra.TabStop = false;
@@ -48,21 +47,24 @@
             // lblEsperando
             // 
             lblEsperando.AutoSize = true;
-            lblEsperando.Location = new Point(95, 330);
+            lblEsperando.Font = new Font("Segoe UI Variable Display Semib", 15.75F, FontStyle.Bold);
+            lblEsperando.ForeColor = Color.White;
+            lblEsperando.Location = new Point(15, 235);
             lblEsperando.Name = "lblEsperando";
-            lblEsperando.Size = new Size(265, 20);
+            lblEsperando.Size = new Size(374, 28);
             lblEsperando.TabIndex = 26;
             lblEsperando.Text = "En espera de la eleccion de (nombre)...";
             // 
             // EsperaConfirmacion
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(64, 64, 64);
             Controls.Add(lblEsperando);
             Controls.Add(pbPiedra);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "EsperaConfirmacion";
-            Size = new Size(459, 490);
+            Size = new Size(402, 368);
             ((System.ComponentModel.ISupportInitialize)pbPiedra).EndInit();
             ResumeLayout(false);
             PerformLayout();

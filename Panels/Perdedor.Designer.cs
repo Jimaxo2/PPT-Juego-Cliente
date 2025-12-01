@@ -37,42 +37,45 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(114, 95);
+            textBox1.Location = new Point(108, 71);
+            textBox1.Margin = new Padding(3, 2, 3, 2);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(225, 27);
+            textBox1.Size = new Size(197, 23);
             textBox1.TabIndex = 31;
             textBox1.Text = "Nombre del jugador";
             // 
             // lblEsperando
             // 
             lblEsperando.AutoSize = true;
-            lblEsperando.Location = new Point(152, 392);
+            lblEsperando.Font = new Font("Segoe UI Variable Display Semib", 15.75F, FontStyle.Bold);
+            lblEsperando.ForeColor = Color.White;
+            lblEsperando.Location = new Point(99, 285);
             lblEsperando.Name = "lblEsperando";
-            lblEsperando.Size = new Size(153, 20);
+            lblEsperando.Size = new Size(217, 28);
             lblEsperando.TabIndex = 30;
             lblEsperando.Text = "Que pendejo perdiste";
             // 
             // pbPiedra
             // 
             pbPiedra.Image = (Image)resources.GetObject("pbPiedra.Image");
-            pbPiedra.Location = new Point(114, 157);
-            pbPiedra.Margin = new Padding(3, 4, 3, 4);
+            pbPiedra.Location = new Point(108, 118);
             pbPiedra.Name = "pbPiedra";
-            pbPiedra.Size = new Size(225, 219);
+            pbPiedra.Size = new Size(197, 164);
             pbPiedra.SizeMode = PictureBoxSizeMode.Zoom;
             pbPiedra.TabIndex = 29;
             pbPiedra.TabStop = false;
             // 
             // Perdedor
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(64, 64, 64);
             Controls.Add(textBox1);
             Controls.Add(lblEsperando);
             Controls.Add(pbPiedra);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Perdedor";
-            Size = new Size(483, 536);
+            Size = new Size(423, 402);
             ((System.ComponentModel.ISupportInitialize)pbPiedra).EndInit();
             ResumeLayout(false);
             PerformLayout();

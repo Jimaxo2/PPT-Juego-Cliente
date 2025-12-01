@@ -32,6 +32,7 @@ namespace PPT_Juego_Cliente
 
             // Agregarlo al panel contenedor
             pDisplay.Controls.Add(Login);
+
            // this.Text = "Iniciar sesion";
             this.Text = "Inicio de Sesion";
         }
