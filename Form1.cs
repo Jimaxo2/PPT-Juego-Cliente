@@ -13,14 +13,16 @@ namespace PPT_Juego_Cliente
             pDisplay.Controls.Clear();
 
             // Crear instancia del panel Login
-            IniciarSesion Login = new IniciarSesion();
-
-            // Para que ocupe todo el espacio
-            Login.Dock = DockStyle.Fill;
+             IniciarSesion Login = new IniciarSesion();
+          
+             Login.Dock = DockStyle.Fill;
+            // Quitar Dock
+            Login.Dock = DockStyle.None;
 
             // Agregarlo al panel contenedor
             pDisplay.Controls.Add(Login);
-            this.Text = "Iniciar sesion";
+           // this.Text = "Iniciar sesion";
+            this.Text = "Inicio de Sesion";
         }
     }
 }
