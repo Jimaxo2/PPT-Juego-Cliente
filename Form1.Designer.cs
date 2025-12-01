@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             pDisplay = new Panel();
             SuspendLayout();
             // 
@@ -45,6 +46,7 @@
             BackColor = Color.FromArgb(64, 64, 64);
             ClientSize = new Size(984, 561);
             Controls.Add(pDisplay);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Iniciar sesión   |   Piedra Papel o Tijera";

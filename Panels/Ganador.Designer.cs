@@ -38,10 +38,9 @@
             // pbPiedra
             // 
             pbPiedra.Image = (Image)resources.GetObject("pbPiedra.Image");
-            pbPiedra.Location = new Point(145, 156);
-            pbPiedra.Margin = new Padding(3, 4, 3, 4);
+            pbPiedra.Location = new Point(127, 117);
             pbPiedra.Name = "pbPiedra";
-            pbPiedra.Size = new Size(225, 219);
+            pbPiedra.Size = new Size(197, 164);
             pbPiedra.SizeMode = PictureBoxSizeMode.Zoom;
             pbPiedra.TabIndex = 20;
             pbPiedra.TabStop = false;
@@ -49,30 +48,34 @@
             // lblEsperando
             // 
             lblEsperando.AutoSize = true;
-            lblEsperando.Location = new Point(183, 391);
+            lblEsperando.Font = new Font("Segoe UI Variable Display Semib", 15.75F, FontStyle.Bold);
+            lblEsperando.ForeColor = Color.White;
+            lblEsperando.Location = new Point(125, 284);
             lblEsperando.Name = "lblEsperando";
-            lblEsperando.Size = new Size(144, 20);
+            lblEsperando.Size = new Size(206, 28);
             lblEsperando.TabIndex = 27;
             lblEsperando.Text = "Felicidades Ganaste!";
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(145, 92);
+            textBox1.Location = new Point(127, 69);
+            textBox1.Margin = new Padding(3, 2, 3, 2);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(225, 27);
+            textBox1.Size = new Size(197, 23);
             textBox1.TabIndex = 28;
             textBox1.Text = "Nombre del jugador";
             // 
             // Ganador
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(64, 64, 64);
             Controls.Add(textBox1);
             Controls.Add(lblEsperando);
             Controls.Add(pbPiedra);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Ganador";
-            Size = new Size(551, 512);
+            Size = new Size(482, 384);
             ((System.ComponentModel.ISupportInitialize)pbPiedra).EndInit();
             ResumeLayout(false);
             PerformLayout();
