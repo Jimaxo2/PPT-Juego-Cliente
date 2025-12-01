@@ -37,7 +37,7 @@ namespace PPT_Juego_Cliente
         {
             // Si alguno está vacío, o si coinciden, vaciar texto.
             if ((string.IsNullOrEmpty(TbContraseñaJugador.Text) &&
-                string.IsNullOrEmpty(TbConfirmarContraseña.Text))||
+                string.IsNullOrEmpty(TbConfirmarContraseña.Text)) ||
                 TbContraseñaJugador.Text == TbConfirmarContraseña.Text)
             {
                 lbCoincidencias.Text = string.Empty;
@@ -105,6 +105,11 @@ namespace PPT_Juego_Cliente
             MessageBox.Show("La cuenta se creo exitosamente: " + nombreJugador);
 
             this.Close();
+        }
+
+        private void lbCoincidencias_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -12,7 +12,7 @@ namespace PPT_Juego_Cliente
         {
             InitializeComponent();
 
-            // Conectamos con el servidor al iniciar la aplicación
+            // Conectamos con el servidor al iniciar la aplicaciï¿½n
             client = new TcpClient("127.0.0.1", 5000);
             stream = client.GetStream();
 
@@ -32,7 +32,8 @@ namespace PPT_Juego_Cliente
 
             // Agregarlo al panel contenedor
             pDisplay.Controls.Add(Login);
-            this.Text = "Iniciar sesion";
+           // this.Text = "Iniciar sesion";
+            this.Text = "Inicio de Sesion";
         }
     }
 }
