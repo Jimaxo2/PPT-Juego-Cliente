@@ -37,9 +37,9 @@
             // pbPiedra
             // 
             pbPiedra.Image = (Image)resources.GetObject("pbPiedra.Image");
-            pbPiedra.Location = new Point(96, 68);
+            pbPiedra.Location = new Point(237, 99);
             pbPiedra.Name = "pbPiedra";
-            pbPiedra.Size = new Size(197, 164);
+            pbPiedra.Size = new Size(308, 278);
             pbPiedra.SizeMode = PictureBoxSizeMode.Zoom;
             pbPiedra.TabIndex = 19;
             pbPiedra.TabStop = false;
@@ -49,11 +49,12 @@
             lblEsperando.AutoSize = true;
             lblEsperando.Font = new Font("Segoe UI Variable Display Semib", 15.75F, FontStyle.Bold);
             lblEsperando.ForeColor = Color.White;
-            lblEsperando.Location = new Point(15, 235);
+            lblEsperando.Location = new Point(255, 399);
             lblEsperando.Name = "lblEsperando";
-            lblEsperando.Size = new Size(374, 28);
+            lblEsperando.Size = new Size(281, 28);
             lblEsperando.TabIndex = 26;
-            lblEsperando.Text = "En espera de la eleccion de (nombre)...";
+            lblEsperando.Text = "En espera del otro Jugador...";
+            lblEsperando.Click += lblEsperando_Click;
             // 
             // EsperaConfirmacion
             // 
@@ -64,7 +65,7 @@
             Controls.Add(pbPiedra);
             Margin = new Padding(3, 2, 3, 2);
             Name = "EsperaConfirmacion";
-            Size = new Size(402, 368);
+            Size = new Size(817, 631);
             ((System.ComponentModel.ISupportInitialize)pbPiedra).EndInit();
             ResumeLayout(false);
             PerformLayout();

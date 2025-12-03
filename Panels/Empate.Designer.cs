@@ -1,6 +1,6 @@
 ﻿namespace PPT_Juego_Cliente.Panels
 {
-    partial class Ganador
+    partial class Empate
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,41 +28,40 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ganador));
-            lblEsperando = new Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Empate));
             pictureBox1 = new PictureBox();
+            lblEsperando = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(300, 151);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(273, 270);
+            pictureBox1.TabIndex = 29;
+            pictureBox1.TabStop = false;
             // 
             // lblEsperando
             // 
             lblEsperando.AutoSize = true;
             lblEsperando.Font = new Font("Segoe UI Variable Display Semib", 15.75F, FontStyle.Bold);
             lblEsperando.ForeColor = Color.White;
-            lblEsperando.Location = new Point(306, 470);
+            lblEsperando.Location = new Point(380, 440);
             lblEsperando.Name = "lblEsperando";
-            lblEsperando.Size = new Size(285, 28);
-            lblEsperando.TabIndex = 27;
-            lblEsperando.Text = "¡Felicidades, eres el ganador!";
+            lblEsperando.Size = new Size(134, 28);
+            lblEsperando.TabIndex = 30;
+            lblEsperando.Text = "¡Fue Empate!";
             // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(306, 158);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(264, 276);
-            pictureBox1.TabIndex = 30;
-            pictureBox1.TabStop = false;
-            // 
-            // Ganador
+            // Empate
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(64, 64, 64);
-            Controls.Add(pictureBox1);
             Controls.Add(lblEsperando);
-            Margin = new Padding(3, 2, 3, 2);
-            Name = "Ganador";
+            Controls.Add(pictureBox1);
+            Name = "Empate";
             Size = new Size(914, 675);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
@@ -70,7 +69,8 @@
         }
 
         #endregion
-        private Label lblEsperando;
+
         private PictureBox pictureBox1;
+        private Label lblEsperando;
     }
 }

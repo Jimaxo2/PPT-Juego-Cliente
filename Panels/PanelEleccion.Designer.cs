@@ -31,11 +31,11 @@
             pbPiedra = new PictureBox();
             pbPapel = new PictureBox();
             pbTijera = new PictureBox();
-            label6 = new Label();
-            label4 = new Label();
-            label5 = new Label();
             lblEstadoEleccion = new Label();
             btnConfirmar = new Button();
+            lbGanadas = new Label();
+            label1 = new Label();
+            label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)pbPiedra).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbPapel).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbTijera).BeginInit();
@@ -44,9 +44,9 @@
             // pbPiedra
             // 
             pbPiedra.Image = Properties.Resources.Piedra;
-            pbPiedra.Location = new Point(89, 123);
+            pbPiedra.Location = new Point(148, 187);
             pbPiedra.Name = "pbPiedra";
-            pbPiedra.Size = new Size(125, 94);
+            pbPiedra.Size = new Size(189, 120);
             pbPiedra.SizeMode = PictureBoxSizeMode.Zoom;
             pbPiedra.TabIndex = 18;
             pbPiedra.TabStop = false;
@@ -54,9 +54,9 @@
             // pbPapel
             // 
             pbPapel.Image = Properties.Resources.Papel;
-            pbPapel.Location = new Point(306, 123);
+            pbPapel.Location = new Point(388, 187);
             pbPapel.Name = "pbPapel";
-            pbPapel.Size = new Size(133, 94);
+            pbPapel.Size = new Size(189, 120);
             pbPapel.SizeMode = PictureBoxSizeMode.Zoom;
             pbPapel.TabIndex = 19;
             pbPapel.TabStop = false;
@@ -64,55 +64,19 @@
             // pbTijera
             // 
             pbTijera.Image = Properties.Resources.Tijera;
-            pbTijera.Location = new Point(518, 123);
+            pbTijera.Location = new Point(642, 187);
             pbTijera.Name = "pbTijera";
-            pbTijera.Size = new Size(159, 94);
+            pbTijera.Size = new Size(189, 120);
             pbTijera.SizeMode = PictureBoxSizeMode.Zoom;
             pbTijera.TabIndex = 20;
             pbTijera.TabStop = false;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.BackColor = Color.White;
-            label6.Font = new Font("Segoe UI Variable Display Semib", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.ForeColor = Color.Black;
-            label6.Location = new Point(124, 229);
-            label6.Name = "label6";
-            label6.Size = new Size(41, 16);
-            label6.TabIndex = 21;
-            label6.Text = "Piedra";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.BackColor = Color.White;
-            label4.Font = new Font("Segoe UI Variable Display Semib", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.ForeColor = Color.Black;
-            label4.Location = new Point(349, 229);
-            label4.Name = "label4";
-            label4.Size = new Size(36, 16);
-            label4.TabIndex = 23;
-            label4.Text = "Papel";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.BackColor = Color.White;
-            label5.Font = new Font("Segoe UI Variable Display Semib", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.ForeColor = Color.Black;
-            label5.Location = new Point(575, 229);
-            label5.Name = "label5";
-            label5.Size = new Size(37, 16);
-            label5.TabIndex = 24;
-            label5.Text = "Tijera";
             // 
             // lblEstadoEleccion
             // 
             lblEstadoEleccion.AutoSize = true;
             lblEstadoEleccion.Font = new Font("Segoe UI Variable Display Semib", 15.75F, FontStyle.Bold);
             lblEstadoEleccion.ForeColor = Color.White;
-            lblEstadoEleccion.Location = new Point(260, 46);
+            lblEstadoEleccion.Location = new Point(377, 77);
             lblEstadoEleccion.Name = "lblEstadoEleccion";
             lblEstadoEleccion.Size = new Size(213, 28);
             lblEstadoEleccion.TabIndex = 25;
@@ -121,30 +85,67 @@
             // 
             // btnConfirmar
             // 
-            btnConfirmar.Location = new Point(298, 290);
-            btnConfirmar.Margin = new Padding(3, 2, 3, 2);
+            btnConfirmar.BackColor = Color.ForestGreen;
+            btnConfirmar.FlatAppearance.BorderSize = 0;
+            btnConfirmar.FlatStyle = FlatStyle.Flat;
+            btnConfirmar.Font = new Font("Segoe UI Variable Display Semib", 15.75F, FontStyle.Bold);
+            btnConfirmar.ForeColor = Color.White;
+            btnConfirmar.Location = new Point(400, 409);
             btnConfirmar.Name = "btnConfirmar";
-            btnConfirmar.Size = new Size(152, 35);
-            btnConfirmar.TabIndex = 26;
+            btnConfirmar.Size = new Size(151, 45);
+            btnConfirmar.TabIndex = 27;
             btnConfirmar.Text = "Listo";
-            btnConfirmar.UseVisualStyleBackColor = true;
+            btnConfirmar.UseVisualStyleBackColor = false;
+            // 
+            // lbGanadas
+            // 
+            lbGanadas.AutoSize = true;
+            lbGanadas.Font = new Font("Segoe UI Variable Display Semib", 15.75F, FontStyle.Bold);
+            lbGanadas.ForeColor = Color.White;
+            lbGanadas.Location = new Point(205, 337);
+            lbGanadas.Name = "lbGanadas";
+            lbGanadas.Size = new Size(72, 28);
+            lbGanadas.TabIndex = 28;
+            lbGanadas.Text = "Piedra";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI Variable Display Semib", 15.75F, FontStyle.Bold);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(456, 337);
+            label1.Name = "label1";
+            label1.Size = new Size(63, 28);
+            label1.TabIndex = 29;
+            label1.Text = "Papel";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI Variable Display Semib", 15.75F, FontStyle.Bold);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(709, 337);
+            label2.Name = "label2";
+            label2.Size = new Size(63, 28);
+            label2.TabIndex = 30;
+            label2.Text = "Tijera";
             // 
             // PanelEleccion
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(64, 64, 64);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(lbGanadas);
             Controls.Add(btnConfirmar);
             Controls.Add(lblEstadoEleccion);
-            Controls.Add(label5);
-            Controls.Add(label4);
-            Controls.Add(label6);
             Controls.Add(pbTijera);
             Controls.Add(pbPapel);
             Controls.Add(pbPiedra);
             Margin = new Padding(3, 2, 3, 2);
             Name = "PanelEleccion";
-            Size = new Size(764, 353);
+            Size = new Size(947, 538);
             ((System.ComponentModel.ISupportInitialize)pbPiedra).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbPapel).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbTijera).EndInit();
@@ -157,10 +158,10 @@
         private PictureBox pbPiedra;
         private PictureBox pbPapel;
         private PictureBox pbTijera;
-        private Label label6;
-        private Label label4;
-        private Label label5;
         private Label lblEstadoEleccion;
         private Button btnConfirmar;
+        private Label lbGanadas;
+        private Label label1;
+        private Label label2;
     }
 }
