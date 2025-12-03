@@ -18,53 +18,65 @@ namespace PPT_Juego_Cliente.Panels
 
         private void InicializarEventosEleccion()
         {
-            // Asignar tags según la jugada
+      
+            pbPiedra.Click -= SeleccionarOpcion;
+            pbPapel.Click -= SeleccionarOpcion;
+            pbTijera.Click -= SeleccionarOpcion;
+            btnConfirmar.Click -= BtnConfirmar_Click;
+
             pbPiedra.Tag = "Piedra";
             pbPapel.Tag = "Papel";
             pbTijera.Tag = "Tijera";
 
-            // Asignar eventos sin modificar designer
             pbPiedra.Click += SeleccionarOpcion;
             pbPapel.Click += SeleccionarOpcion;
             pbTijera.Click += SeleccionarOpcion;
 
             btnConfirmar.Click += BtnConfirmar_Click;
 
+            eleccionJugador = null;
+            btnConfirmar.Enabled = false;
             lblEstadoEleccion.Text = "Selecciona tu jugada";
         }
 
         private void SeleccionarOpcion(object sender, EventArgs e)
         {
             PictureBox pb = sender as PictureBox;
-            if (pb == null) return;
+            if (pb == null || pb.Tag == null)
+            {
+                MessageBox.Show("ERROR: Opción sin jugada asignada.");
+                return;
+            }
 
-            // Quitar selección previa
             pbPiedra.BorderStyle = BorderStyle.None;
             pbPapel.BorderStyle = BorderStyle.None;
             pbTijera.BorderStyle = BorderStyle.None;
 
-            // Marcar el nuevo seleccionado
             pb.BorderStyle = BorderStyle.Fixed3D;
 
-            // Guardar la elección
             eleccionJugador = pb.Tag.ToString();
-
             lblEstadoEleccion.Text = $"Elegiste: {eleccionJugador}";
+
+            btnConfirmar.Enabled = true;
         }
 
         private void BtnConfirmar_Click(object sender, EventArgs e)
         {
-            if (eleccionJugador == null)
+            if (string.IsNullOrEmpty(eleccionJugador))
             {
                 MessageBox.Show("Selecciona una opción antes de confirmar.");
                 return;
             }
 
-            // Enviar al formulario que contiene este panel
             EleccionConfirmada?.Invoke(eleccionJugador);
 
-            // Opcional: deshabilitar para evitar doble clic
             btnConfirmar.Enabled = false;
+        }
+
+
+        private void lblEstadoEleccion_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

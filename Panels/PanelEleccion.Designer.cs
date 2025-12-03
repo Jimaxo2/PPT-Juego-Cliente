@@ -112,11 +112,12 @@
             lblEstadoEleccion.AutoSize = true;
             lblEstadoEleccion.Font = new Font("Segoe UI Variable Display Semib", 15.75F, FontStyle.Bold);
             lblEstadoEleccion.ForeColor = Color.White;
-            lblEstadoEleccion.Location = new Point(276, 58);
+            lblEstadoEleccion.Location = new Point(260, 46);
             lblEstadoEleccion.Name = "lblEstadoEleccion";
             lblEstadoEleccion.Size = new Size(213, 28);
             lblEstadoEleccion.TabIndex = 25;
             lblEstadoEleccion.Text = "Elige con que jugaras";
+            lblEstadoEleccion.Click += lblEstadoEleccion_Click;
             // 
             // btnConfirmar
             // 

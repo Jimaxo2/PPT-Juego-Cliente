@@ -205,73 +205,93 @@ namespace PPT_Juego_Cliente
                             this.Text = "¡Tu turno!";
                             break;
 
+                        // EL SERVIDOR MANDA EL NOMBRE Y LA ELECCION DE CADA JUGADOR
+                        case "ResultadoCompleto":
+                            {
+                                // argumento: "Nombre1,Jugada1,Nombre2,Jugada2"
+                                string[] datos = argumento.Split(',');
+
+                                if (datos.Length < 4)
+                                {
+                                    MessageBox.Show("ERROR: Datos incompletos del servidor.");
+                                    break;
+                                }
+
+                                string nombre1 = datos[0].Trim();
+                                string jugada1 = datos[1].Trim();
+                                string nombre2 = datos[2].Trim();
+                                string jugada2 = datos[3].Trim();
+
+                                Resultado panelResultado = new Resultado();
+                                panelResultado.SetDatosResultado(
+                                    NombreUsuario,
+                                    nombre1, jugada1,
+                                    nombre2, jugada2
+                                );
+
+                                CambiarPanel(panelResultado);
+                                this.Text = "Resultados del Juego";
+                                break;
+                            }
                         // EL SERVIDOR MANDA QUIÉN GANÓ
-                        case "Resultado":
-
-                            string resultadoRaw = argumento.Trim();
-                            string resultado = resultadoRaw.ToUpper().Trim();
-
-                            // 1. Determinar qué panel mostrar
-                            if (resultado.Contains("EMPATE"))
-                            {
-                                CambiarPanel(new Resultado());
-                            }
-                            else if (resultado.StartsWith("GANADOR"))
-                            {
-                                // Limpiamos el string para obtener solo el nombre
-                                string nombreGanador = resultadoRaw;
-                                int indiceDosPuntos = nombreGanador.IndexOf(':');
-                                if (indiceDosPuntos >= 0)
-                                {
-                                    nombreGanador = nombreGanador.Substring(indiceDosPuntos + 1).Trim();
-                                }
-
-                                // Si mi nombre es igual al del ganador -> Muestro panel Ganador
-                                if (string.Equals(nombreGanador, NombreUsuario?.Trim(), StringComparison.OrdinalIgnoreCase))
-                                {
-                                    CambiarPanel(new Ganador());
-                                }
-                                else // Si no -> Muestro panel Perdedor (el panda)
-                                {
-                                    CambiarPanel(new Perdedor());
-                                }
-                            }
-                            else
-                            {
-                                CambiarPanel(new Resultado());
-                            }
-
-                            // 2. Lógica de Retorno al Menú
-
-                            // Avisamos al sistema que nos vamos a desconectar a propósito (para evitar errores)
-                            requiereReconexion = true;
-
-                            // Iniciamos una tarea en segundo plano (Timer)
-                            Task.Factory.StartNew(() =>
-                            {
-                                // Esperamos 4 segundos viendo el resultado
-                                Thread.Sleep(4000);
-
-                                // Volvemos al hilo de la UI
-                                this.Invoke(new Action(() =>
-                                {
-                                    // Cerramos conexiones limpiamente
-                                    try
+                        case "Ganador":
                                     {
-                                        conectado = false;
-                                        stream?.Close();
-                                        client?.Close();
+                                        string resultadoRaw = argumento.Trim();
+                                        string resultadoMayus = resultadoRaw.ToUpper();
+
+                                        // 1. Mostrar panel según resultado
+                                        if (resultadoMayus.Contains("EMPATE"))
+                                        {
+                                            CambiarPanel(new Resultado());
+                                        }
+                                        else if (resultadoMayus.StartsWith("GANADOR"))
+                                        {
+                                            string nombreGanador = resultadoRaw;
+                                            int idx = nombreGanador.IndexOf(':');
+                                            if (idx >= 0)
+                                                nombreGanador = nombreGanador.Substring(idx + 1).Trim();
+
+                                            if (string.Equals(nombreGanador, NombreUsuario?.Trim(), StringComparison.OrdinalIgnoreCase))
+                                            {
+                                                CambiarPanel(new Ganador());
+                                            }
+                                            else
+                                            {
+                                                CambiarPanel(new Perdedor());
+                                            }
+                                        }
+                                        else
+                                        {
+                                            CambiarPanel(new Resultado());
+                                        }
+
+                                        // 2. FINALIZAR CONEXIÓN Y REGRESAR AL MENÚ
+                                        requiereReconexion = true;
+
+                                        Task.Run(() =>
+                                        {
+                                            Thread.Sleep(4000); // ver pantalla resultado final
+
+                                            this.Invoke(() =>
+                                            {
+                                                try
+                                                {
+                                                    conectado = false;
+                                                    stream?.Close();
+                                                    client?.Close();
+                                                }
+                                                catch { }
+
+                                                MostrarMenu();
+                                            });
+                                        });
+                                        break;
                                     }
-                                    catch { }
 
-                                    // Volvemos al menú principal
-                                    MostrarMenu();
-                                }));
-                            });
-                            break;
 
-                        // EL SERVIDOR MANDA UN MENSAJE DE TEXTO (ej. "Esperando rival")
-                        case "Mensaje":
+
+                                // EL SERVIDOR MANDA UN MENSAJE DE TEXTO (ej. "Esperando rival")
+                                case "Mensaje":
                             this.Text = argumento;
                             break;
                     }
