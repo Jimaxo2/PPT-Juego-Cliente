@@ -242,7 +242,7 @@ namespace PPT_Juego_Cliente
                                         // 1. Mostrar panel según resultado
                                         if (resultadoMayus.Contains("EMPATE"))
                                         {
-                                            CambiarPanel(new Resultado());
+                                            CambiarPanel(new Empate());
                                         }
                                         else if (resultadoMayus.StartsWith("GANADOR"))
                                         {

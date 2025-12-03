@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace PPT_Juego_Cliente.Panels
 {
-    public partial class EsperaConfirmacion : UserControl
+    public partial class Empate : UserControl
     {
-        public EsperaConfirmacion()
+        public Empate()
         {
             InitializeComponent();
-        }
-
-        private void lblEsperando_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
