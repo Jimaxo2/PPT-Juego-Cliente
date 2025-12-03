@@ -1,11 +1,12 @@
+using PPT_Juego_Cliente.Models;
 using PPT_Juego_Cliente.Panels;
-using System.Net.Sockets;
-using System.Windows.Forms;
-using System.Threading;
-using System.Text;
-using System.IO;
 using System;
+using System.IO;
+using System.Net.Sockets;
+using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PPT_Juego_Cliente
 {
@@ -24,6 +25,8 @@ namespace PPT_Juego_Cliente
         public string NombreUsuario = "";
         public string ContraseniaUsuario = "";
         private bool esPrimeraPartida = true;
+
+        public Jugador JugadorActual { get; set; }
 
         public Form1()
         {
@@ -320,10 +323,17 @@ namespace PPT_Juego_Cliente
         }
 
         // --- MÉTODO: MOSTRAR MENÚ ---
-        // Función simple para cargar el panel del Menú Principal
+        // ACTUALIZADO: Ahora carga los datos del jugador en el menú
         public void MostrarMenu()
         {
             MenuPrincipal menu = new MenuPrincipal();
+
+            // NUEVO: Cargamos los datos del jugador en el menú
+            if (JugadorActual != null)
+            {
+                menu.CargarDatosJugador(JugadorActual);
+            }
+
             CambiarPanel(menu);
             this.Text = "Menu Principal - " + NombreUsuario;
         }

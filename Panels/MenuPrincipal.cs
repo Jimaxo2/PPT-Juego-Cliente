@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PPT_Juego_Cliente.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,32 @@ namespace PPT_Juego_Cliente.Panels
         public MenuPrincipal()
         {
             InitializeComponent();
+        }
+
+        public void CargarDatosJugador(Jugador jugador)
+        {   
+            if (jugador != null)
+            {
+                // Mostrar nombre del jugador
+                lbNombreJugador.Text = jugador.NombreJugador;
+
+                // Mostrar estadísticas
+                lbTotalPartidas.Text = jugador.TotalPartidas.ToString();
+                lbPartidasGanadas.Text = jugador.PartidasGanadas.ToString();
+                lbPartidasEmpatadas.Text = jugador.PartidasEmpatadas.ToString();
+                lbPartidasPerdidas.Text = jugador.PartidasPerdidas.ToString();
+
+                // Calcular y mostrar tasa de victoria
+                if (jugador.TotalPartidas > 0)
+                {
+                    double tasaVictoria = (jugador.PartidasGanadas * 100.0) / jugador.TotalPartidas;
+                    lbTasaVictoria.Text = tasaVictoria.ToString("0.00") + "%";
+                }
+                else
+                {
+                    lbTasaVictoria.Text = "0.00%";
+                }
+            }
         }
 
         // --- BOTÓN SALIR ---

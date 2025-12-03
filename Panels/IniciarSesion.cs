@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PPT_Juego_Cliente.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -79,21 +80,27 @@ namespace PPT_Juego_Cliente.Panels
 
                 // 8. Login Exitoso: Procesamos los datos recibidos.
                 string[] datos = respuesta.Split('|');
-                string nombreJugador = datos[1].Trim();
 
-                MessageBox.Show("Sesión iniciada correctamente: " + nombreJugador);
+                // Crear objeto Jugador
+                Jugador jugador = new Jugador
+                {
+                    IDJugador = int.Parse(datos[0]),
+                    NombreJugador = datos[1].Trim(),
+                    TotalPartidas = int.Parse(datos[3]),
+                    PartidasGanadas = int.Parse(datos[4]),
+                    PartidasEmpatadas = int.Parse(datos[5]),
+                    PartidasPerdidas = int.Parse(datos[6])
+                };
 
-                // Buscamos el formulario padre (Form1) para guardar los datos ahí.
+                MessageBox.Show("Sesión iniciada correctamente: " + jugador.NombreJugador);
+
                 Form1 formPrincipal = this.ParentForm as Form1;
 
                 if (formPrincipal != null)
                 {
-                    formPrincipal.NombreUsuario = nombreJugador;
-
-                    // IMPORTANTE: Guardamos la contraseña en la memoria para poder usarla en la reconexión de "Nueva Partida".
+                    formPrincipal.NombreUsuario = jugador.NombreJugador;
                     formPrincipal.ContraseniaUsuario = contrasena;
-
-                    // Cambiamos de pantalla al menú principal.
+                    formPrincipal.JugadorActual = jugador; // NUEVA LÍNEA
                     formPrincipal.MostrarMenu();
                 }
             }

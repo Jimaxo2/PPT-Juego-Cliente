@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PPT_Juego_Cliente.Models
 {
-    internal class Jugador
+    public class Jugador
     {
         // Propiedades del jugador para su información y sus estadísticas
         public int IDJugador { get; set; }
