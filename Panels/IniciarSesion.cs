@@ -15,6 +15,9 @@ namespace PPT_Juego_Cliente.Panels
     {
         TcpClient client;
         NetworkStream stream;
+
+        // --- CONSTRUCTOR ---
+        // Recibe la conexión que ya se creó en el Form1 para poder usarla aquí.
         public IniciarSesion(TcpClient client, NetworkStream stram)
         {
             InitializeComponent();
@@ -22,9 +25,12 @@ namespace PPT_Juego_Cliente.Panels
             this.stream = stram;
         }
 
-        private void BtnIniciarSesion_Click(object sender, EventArgs e)
+        // --- BOTÓN INICIAR SESIÓN ---
+        // Envía tu usuario y contraseña al servidor para validar.
+        // Es ASÍNCRONO (async/await) para no congelar la pantalla mientras espera respuesta del servidor.
+        private async void BtnIniciarSesion_Click(object sender, EventArgs e)
         {
-            // Validaciones básicas
+            // 1. Validaciones: Revisa que las cajas de texto no estén vacías.
             if (string.IsNullOrWhiteSpace(TbNombreJugador.Text))
             {
                 MessageBox.Show("Por favor, ingrese nombre de Jugador.");
@@ -36,92 +42,76 @@ namespace PPT_Juego_Cliente.Panels
                 return;
             }
 
-            string usuario = TbNombreJugador.Text;
-            string contrasena = TbContraseñaJugador.Text;
+            // 2. Feedback Visual: Ponemos cursor de carga y desactivamos botón para que el usuario sepa que está trabajando.
+            BtnIniciarSesion.Enabled = false;
+            this.Cursor = Cursors.WaitCursor;
 
-            // CREAR MENSAJE PARA EL SERVIDOR
-            string mensaje =
-                "IniciarSesion\n" +
-                $"{usuario}|{contrasena}\n";
-
-            // ENVIAR AL SERVIDOR
-            byte[] dataOut = Encoding.UTF8.GetBytes(mensaje);
-            stream.Write(dataOut, 0, dataOut.Length);
-
-            // ESPERAR RESPUESTA DEL SERVIDOR
-            byte[] buffer = new byte[1024];
-            int bytes = stream.Read(buffer, 0, buffer.Length);
-            string respuesta = Encoding.UTF8.GetString(buffer, 0, bytes).Trim();
-
-            // PROCESAR RESPUESTA
-            if (respuesta.StartsWith("Error"))
+            try
             {
-                // EJEMPLO: "Error|Credenciales incorrectas"
-                string[] partes = respuesta.Split('|');
-                MessageBox.Show(partes.Length > 1 ? partes[1] : respuesta);
-                return;
-            }
+                string usuario = TbNombreJugador.Text;
+                string contrasena = TbContraseñaJugador.Text;
 
-            // LOGIN CORRECTO
-            // respuesta = "Javier|Password12" (por ejemplo)
-            string[] datos = respuesta.Split('|');
+                // 3. Preparar Mensaje: Armamos el protocolo que entiende el servidor.
+                string mensaje = "IniciarSesion\n" + $"{usuario}|{contrasena}\n";
+                byte[] dataOut = Encoding.UTF8.GetBytes(mensaje);
 
-            string nombreJugador = datos[1];
-            string passJugador = datos[0];
+                // 4. Enviar Datos: Usamos 'await' para enviar sin detener el programa principal.
+                await stream.WriteAsync(dataOut, 0, dataOut.Length);
 
-            MessageBox.Show("Sesión iniciada correctamente: " + nombreJugador);
-            
-            // Aquí ya puedes cambiar de ventana / cargar menú principal
-            Control container = this.Parent ?? this.FindForm();
-            var parentForm = this.FindForm();
-            if (container != null)
-            {
-                var menu = new MenuPrincipal();
-                menu.Dock = DockStyle.Fill;
+                byte[] buffer = new byte[1024];
 
-                container.SuspendLayout();
+                // 5. Esperar Respuesta: Aquí el programa espera los datos del servidor PERO la ventana sigue respondiendo (no se congela).
+                int bytes = await stream.ReadAsync(buffer, 0, buffer.Length);
 
-                int index = container.Controls.IndexOf(this);
-                if (index >= 0)
+                string respuesta = Encoding.UTF8.GetString(buffer, 0, bytes).Trim();
+
+                // 6. Restaurar Interfaz: Ya contestó el servidor, devolvemos el cursor a la normalidad.
+                this.Cursor = Cursors.Default;
+                BtnIniciarSesion.Enabled = true;
+
+                // 7. Verificar Errores: Si el servidor dice "Error", mostramos el mensaje y paramos.
+                if (respuesta.StartsWith("Error"))
                 {
-                    container.Controls.RemoveAt(index);
-                }
-                else
-                {
-                    // Si no se encuentra por índice, intentar remover por referencia
-                    if (container.Controls.Contains(this))
-                        container.Controls.Remove(this);
+                    string[] partes = respuesta.Split('|');
+                    MessageBox.Show(partes.Length > 1 ? partes[1] : respuesta);
+                    return;
                 }
 
-                container.Controls.Add(menu);
+                // 8. Login Exitoso: Procesamos los datos recibidos.
+                string[] datos = respuesta.Split('|');
+                string nombreJugador = datos[1].Trim();
 
-                if (index >= 0)
-                    container.Controls.SetChildIndex(menu, index);
+                MessageBox.Show("Sesión iniciada correctamente: " + nombreJugador);
 
-                container.ResumeLayout();
+                // Buscamos el formulario padre (Form1) para guardar los datos ahí.
+                Form1 formPrincipal = this.ParentForm as Form1;
 
-                // Actualizar título del formulario principal
-                if (parentForm != null)
+                if (formPrincipal != null)
                 {
-                    parentForm.Text = "Menú Principal   |   Piedra Papel o Tijera";
+                    formPrincipal.NombreUsuario = nombreJugador;
+
+                    // IMPORTANTE: Guardamos la contraseña en la memoria para poder usarla en la reconexión de "Nueva Partida".
+                    formPrincipal.ContraseniaUsuario = contrasena;
+
+                    // Cambiamos de pantalla al menú principal.
+                    formPrincipal.MostrarMenu();
                 }
-
-                // Liberar recursos del control de inicio de sesión
-                this.Dispose();
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("No se pudo cargar el menú principal.");
+                // Si falla la conexión, aseguramos que el cursor vuelva a la normalidad antes de mostrar el error.
+                this.Cursor = Cursors.Default;
+                BtnIniciarSesion.Enabled = true;
+                MessageBox.Show("Error de conexión: " + ex.Message);
             }
-
-            
         }
 
+        // --- BOTÓN CREAR CUENTA ---
+        // Abre una ventana secundaria para registrar un nuevo usuario.
         private void BtnCrearCuenta_Click(object sender, EventArgs e)
         {
-            // Abrir el formulario de creación de cuenta.
             CrearCuenta CrearCuenta = new CrearCuenta(stream);
-            CrearCuenta.ShowDialog();
+            CrearCuenta.ShowDialog(); // ShowDialog hace que no puedas tocar la ventana de atrás hasta cerrar esta.
         }
     }
 }

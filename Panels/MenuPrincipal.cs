@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,18 +15,24 @@ namespace PPT_Juego_Cliente.Panels
         public MenuPrincipal()
         {
             InitializeComponent();
-
-            // labels: lbNombreJugador, lbPartidasJugadas, lbPartidasGanadas, lbPartidasPerdidas, lbPartidasEmpatadas, lbTasaVictoria
         }
 
+        // --- BOTÓN SALIR ---
+        // Cierra toda la aplicación.
         private void BtnSalir_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
+        // --- BOTÓN NUEVA PARTIDA ---
+        // Pide al formulario principal (Form1) que inicie la conexión.
         private void BtnNuevaPartida_Click(object sender, EventArgs e)
         {
-            // Abrir panel de nueva partida
+            Form1 form = this.ParentForm as Form1;
+            if (form != null)
+            {
+                form.IniciarJuego(); // Ejecuta la reconexión
+            }
         }
     }
 }
