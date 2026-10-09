@@ -173,7 +173,7 @@ La dirección `127.0.0.1` corresponde al equipo local. Por lo tanto, si el servi
 
 Si el servidor no está activo o no acepta conexiones, el cliente no podrá iniciar correctamente la comunicación.
 
-## 📄 Estado del proyecto
+##  Estado del proyecto
 
 El cliente cuenta con componentes para el inicio de sesión, la navegación entre pantallas, la selección de jugadas, la recepción de resultados y la reconexión entre partidas.
 
